@@ -14,10 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,21 +23,33 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.loginapp.ui.theme.LoginAppTheme
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             LoginAppTheme {
-                    LoginPage()
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = "login"
+                ) {
+                    composable("login") { LoginPage(navController) }
+                    composable("signup") { SignUp(navController) }
                 }
+            }
         }
     }
 }
+
+
 @Composable
-fun LoginPage() {
+fun LoginPage(navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -80,7 +88,7 @@ fun LoginPage() {
                 )
             }
 
-            LoginColumn()
+            LoginColumn(navController)
         }
     }
 }
@@ -90,6 +98,6 @@ fun LoginPage() {
 @Composable
 fun LoginPreview() {
     LoginAppTheme {
-       LoginPage()
+        LoginPage(rememberNavController())
     }
 }

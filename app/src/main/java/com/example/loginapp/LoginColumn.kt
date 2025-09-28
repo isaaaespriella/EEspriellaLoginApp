@@ -1,9 +1,5 @@
 package com.example.loginapp
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -35,10 +31,12 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.loginapp.ui.theme.LoginAppTheme
 
 @Composable
-fun LoginColumn() {
+fun LoginColumn(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -80,7 +78,7 @@ fun LoginColumn() {
             onClick = { },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp),
+                .height(60.dp),
             shape = RoundedCornerShape(
                 topStart = 20.dp,
                 topEnd = 0.dp,
@@ -102,7 +100,7 @@ fun LoginColumn() {
             modifier = Modifier
                 .weight(1f)
                 .wrapContentHeight(align = Alignment.Bottom)
-                .clickable { }
+                .clickable { navController.navigate("signup") }
         )
     }
 }
@@ -167,6 +165,7 @@ fun FieldBox(
 @Composable
 fun LoginColumnPreview() {
     LoginAppTheme {
-        LoginColumn()
+        LoginColumn(rememberNavController())
     }
 }
+
