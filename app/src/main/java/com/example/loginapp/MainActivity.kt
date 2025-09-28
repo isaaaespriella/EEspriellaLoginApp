@@ -56,7 +56,7 @@ fun LoginPage() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 100.dp),
+                .padding(top = 70.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
@@ -80,7 +80,7 @@ fun LoginPage() {
                 )
             }
 
-            LoginBox()
+            LoginColumn()
         }
     }
 }
